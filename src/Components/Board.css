@@ -1,0 +1,66 @@
+/*BOARD*/
+.container{
+    display: grid;
+    border: 3px solid black;
+    grid-template-columns: repeat(8,1fr);
+    grid-template-rows: repeat(8,1fr);
+    gap: 0px;
+    width: 240px;
+    height: 240px;
+    align-items: center;
+    justify-items: center;
+    margin: auto;
+}
+
+/*TILES*/
+.content{
+    align-content: center;
+    justify-content: center;
+    border:1px solid black;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(rgb(17, 197, 221), #0e93bc);
+}
+
+.content:hover{
+    cursor: pointer;
+}
+
+.content:active{
+    background: linear-gradient(rgb(17, 221, 194), #0eb0bc);
+}
+
+.content:disabled{
+    color: #000000;
+    background: aliceblue;
+}
+
+.content:disabled:hover{
+    cursor: default;
+}
+
+/*MINE COUNTER*/
+.mineCounter{
+    margin: auto;
+    padding: 20px;
+}
+
+/*RESET BUTTON*/
+.resetbutton{
+    cursor: pointer;
+    border:1px solid black;
+    width: 100px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(rgb(6, 74, 83), #022a36);
+}
+
+.resetbutton:hover {
+    background: linear-gradient(rgb(8, 103, 116), #065d77);
+}
+
+.resetbutton:active {
+    background: linear-gradient(rgb(14, 171, 192), #079ac7);
+}
