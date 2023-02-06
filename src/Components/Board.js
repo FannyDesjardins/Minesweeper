@@ -10,11 +10,9 @@ let fullBoard = [];
 let hiddenBoard = [];
 let resetCounter = 0;
 let clickCounter = 0;
-//let flagCounter = 0;
 let tileShown = 0;
 let sizeColumns=8;
 let sizeRows =8;
-let counter=0;
 
 export default class Board extends React.Component {  
     
@@ -30,11 +28,10 @@ export default class Board extends React.Component {
         this.reset = this.reset.bind(this);
         this.setClickCount = this.setClickCount.bind(this);
         this.showEmptyTiles = this.showEmptyTiles.bind(this);
-        //set default state
-        this.state = {message:'', fullBoard: fullBoard, numMines: 10, hiddenBoard: hiddenBoard, hasBuilt: false, gameOver:false, flagCount:0, clickCount: clickCounter};
+        this.state = {message:'', fullBoard: fullBoard, numMines: 10, hiddenBoard: hiddenBoard, hasBuilt: false, gameOver:false, flagCount:0, clickCount: clickCounter};//set default state
     }
 
-    showEmptyTiles(index) { //function to reveal the tiles that are blank
+    showEmptyTiles(index) { //function to reveal the tiles that are blank 
         if(fullBoard[index].content==='') { //this condition is here in case the first mine clicked is a mine, see reset function below
             if(index>(sizeColumns-1)) { //excludes top row
                 if(index%sizeColumns!==0) { //excludes the left column
@@ -43,8 +40,7 @@ export default class Board extends React.Component {
                         this.showEmptyTiles(index - sizeColumns - 1);     
                     } else if(fullBoard[(index - sizeColumns)-1].isShown===false) {
                         fullBoard[index - sizeColumns-1].isShown=true; //top left (show tile but dont recurse)
-                        clickCounter++; //increment clickcounter
-                        //console.log("click",clickCounter, "index", index - sizeColumns-1);
+                        clickCounter++;
                     }
                 }
 
@@ -54,8 +50,7 @@ export default class Board extends React.Component {
                         this.showEmptyTiles(index-sizeColumns+1);
                     } else if(fullBoard[index - sizeColumns+1].isShown===false) { 
                         fullBoard[(index - sizeColumns)+1].isShown=true; //top right (show tile but dont recurse) 
-                        clickCounter++; //increment clickcounter
-                        //console.log("click",clickCounter,"index", (index - sizeColumns)+1);
+                        clickCounter++;
                     }
     
                 }
@@ -65,8 +60,7 @@ export default class Board extends React.Component {
                     this.showEmptyTiles(index - sizeColumns);
                 } else if(fullBoard[index - sizeColumns].isShown===false) {
                     fullBoard[index - sizeColumns].isShown=true; //top (show tile but dont recurse)
-                    clickCounter++; //increment clickcounter
-                    //console.log("click",clickCounter,"index",index - sizeColumns);
+                    clickCounter++;
                 }
                     
             }
@@ -80,8 +74,7 @@ export default class Board extends React.Component {
                         this.showEmptyTiles(index + sizeColumns-1);
                     } else if(fullBoard[index + sizeColumns - 1].isShown===false) {
                         fullBoard[index + sizeColumns - 1].isShown=true; //bottom left (show tile but dont recurse)
-                        clickCounter++; //increment clickcounter
-                        //console.log("click", clickCounter,"index",index + sizeColumns - 1)
+                        clickCounter++; 
                     }
                 }
 
@@ -91,8 +84,7 @@ export default class Board extends React.Component {
                         this.showEmptyTiles(index+sizeColumns+1);
                     } else if(fullBoard[index +sizeColumns + 1].isShown===false) {
                         fullBoard[index +sizeColumns + 1].isShown=true; //bottom right (show tile but dont recurse)
-                        clickCounter++; //increment clickcounter
-                        //console.log("click",clickCounter,"index",index +sizeColumns + 1)
+                        clickCounter++;
                     }
                     
                 }
@@ -102,8 +94,7 @@ export default class Board extends React.Component {
                     this.showEmptyTiles(index + sizeColumns);
                 } else if(fullBoard[index + sizeColumns].isShown===false) {
                     fullBoard[index + sizeColumns].isShown=true; //bottom (show tile but dont recurse)
-                    clickCounter++; //increment clickcounter
-                    //console.log("click",clickCounter,"index",index +sizeColumns)
+                    clickCounter++;
                 }
                 
             }
@@ -114,8 +105,7 @@ export default class Board extends React.Component {
                     this.showEmptyTiles(index-1);
                 } else if(fullBoard[index - 1].isShown===false) {
                     fullBoard[index - 1].isShown=true; //left (show tile but dont recurse)
-                    clickCounter++; //increment clickcounter
-                    //console.log("click",clickCounter,"index",index - 1)
+                    clickCounter++;
                 }
                 
             }
@@ -126,8 +116,7 @@ export default class Board extends React.Component {
                     this.showEmptyTiles(index+1);
                 } else if(fullBoard[index + 1].isShown===false) {
                     fullBoard[index + 1].isShown=true; //right (show tile but dont recurse) 
-                    clickCounter++; //increment clickcounters
-                    //console.log("click",clickCounter,"index",index + 1)
+                    clickCounter++;
                 }
                 
             }
@@ -137,8 +126,6 @@ export default class Board extends React.Component {
 
     setClickCount(index) { //to make sure the first click isnt a mine, we count clicks  
         clickCounter++;
-        //console.log("click", clickCounter, "Index", index);
-        //this.state.clickCount === 55 ? this.setWinner() : 
         this.setState({clickCount: clickCounter});
   
     }
@@ -161,7 +148,6 @@ export default class Board extends React.Component {
         for (let i=0; i<sizeColumns*sizeRows; i++) {
             if(fullBoard[i].isShown===true) {
                 tileShown++;
-                //console.log("tileShown", tileShown)
             }
         }
         if (tileShown===sizeColumns*sizeRows-this.state.numMines && fullBoard[index].isMine === false) {
@@ -170,7 +156,7 @@ export default class Board extends React.Component {
             tileShown = 0;
         }
         
-        this.setClickCount(index); //increment clickcounter
+        this.setClickCount(index);
     }
 
     makeGrid(rows,columns) {
@@ -264,11 +250,9 @@ export default class Board extends React.Component {
         resetCounter++; 
         this.makeGrid(sizeRows, sizeColumns);
         if(clickCounter===0 && fullBoard[index].isMine === true) { //if there's a mine again at that position, reset
-            console.log('reseted again');
             this.reset(index);
         } else if (clickCounter===0 && fullBoard[index].isMine === false) {
             this.showEmptyTiles(index); //if not empty tile, only showTile will be executed
-            console.log('reset');
         } else {
             clickCounter=0;
             this.setState({clickCount: 0, flagCount:0, message:'', gameOver: false});
