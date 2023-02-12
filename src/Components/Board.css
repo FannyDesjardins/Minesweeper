@@ -19,7 +19,7 @@
     border:1px solid black;
     width: 30px;
     height: 30px;
-    background: linear-gradient(rgb(17, 197, 221), #0e93bc);
+    background: linear-gradient(rgb(17, 197, 221), #66A5D9);
 }
 
 .content:hover{
@@ -27,7 +27,7 @@
 }
 
 .content:active{
-    background: linear-gradient(rgb(17, 221, 194), #0eb0bc);
+    background: linear-gradient(rgb(17, 221, 194), #66A5D9);
 }
 
 .content:disabled{
@@ -49,12 +49,13 @@
 .resetbutton{
     cursor: pointer;
     border:1px solid black;
+    border-radius: 9999px;
     width: 100px;
     height: 30px;
     font-size: 18px;
     font-weight: bold;
     color: white;
-    background: linear-gradient(rgb(6, 74, 83), #022a36);
+    background-color:#66A5D9;
 }
 
 .resetbutton:hover {
